@@ -15,6 +15,7 @@ for version in "${versions[@]}"; do
 	fi
 
 	variants=$(ls -d $version/*/ | awk -F"/" '{print $2}')
+	variants="$variants default"
 
 	for variant in $variants; do
 		template="Dockerfile-$variant.template"
@@ -28,7 +29,7 @@ for version in "${versions[@]}"; do
 		fullVersion="$(curl -sSL --compressed 'https://nodejs.org/dist' | grep '<a href="v'"$version." | sed -E 's!.*<a href="v([^"/]+)/?".*!\1!' | cut -f 3 -d . | sort -n | tail -1)"
 		(
 			cp $template $dockerfile
-			sed -E -i.bak 's/^(ENV NODE_VERSION |FROM node:).*/\1'"$version.$fullVersion"'/' "$dockerfile"
+			sed -E -i.bak 's/^(ENV NODE_VERSION |FROM ascom\/docker-node:).*/\1'"$version.$fullVersion"'/' "$dockerfile"
 			rm "$dockerfile.bak"
 
 			# Don't set npm log level in 0.10 and 0.12.

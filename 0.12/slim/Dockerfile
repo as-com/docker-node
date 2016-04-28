@@ -1,4 +1,4 @@
-FROM buildpack-deps:jessie-curl
+FROM buildpack-deps:xenial-curl
 
 # gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
