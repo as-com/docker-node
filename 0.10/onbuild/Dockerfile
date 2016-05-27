@@ -1,4 +1,4 @@
-FROM ascom/docker-node:0.10.44
+FROM ascom/docker-node:0.10.45
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
